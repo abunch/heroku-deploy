@@ -1,0 +1,16 @@
+name: "Heroku Deploy"
+description: "Deploy to Heroku using the Platform API"
+branding:
+  icon: "upload-cloud"
+  color: "purple"
+inputs:
+  app-name:
+    description: "Name of Heroku application"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        heroku git:remote -a ${{ inputs.app-name }}
+        git push heroku master
+      shell: bash
